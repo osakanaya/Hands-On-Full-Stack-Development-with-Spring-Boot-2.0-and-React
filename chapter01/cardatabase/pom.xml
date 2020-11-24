@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.packt</groupId>
-	<artifactId>carddatabase</artifactId>
+	<artifactId>cardatabase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>carddatabase</name>
 	<description>carddatabase</description>
