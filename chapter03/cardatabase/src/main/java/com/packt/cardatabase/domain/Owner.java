@@ -1,18 +1,13 @@
 package com.packt.cardatabase.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,16 +19,8 @@ public class Owner {
 	private String firstName;
 	private String lastName;
 	
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-//	private List<Car> cars;
-	
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "car_owner", joinColumns = {
-		@JoinColumn(name = "ownerid")
-	}, inverseJoinColumns = {
-		@JoinColumn(name = "id")
-	})
-	private Set<Car> cars = new HashSet<Car>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	private List<Car> cars;
 	
 	public Owner() {}
 
@@ -66,19 +53,11 @@ public class Owner {
 		this.lastName = lastName;
 	}
 
-//	public List<Car> getCars() {
-//		return cars;
-//	}
-//
-//	public void setCars(List<Car> cars) {
-//		this.cars = cars;
-//	}
-
-	public Set<Car> getCars() {
+	public List<Car> getCars() {
 		return cars;
 	}
 
-	public void setCars(Set<Car> cars) {
+	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
 
