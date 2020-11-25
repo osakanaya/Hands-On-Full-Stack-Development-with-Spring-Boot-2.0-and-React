@@ -3,9 +3,12 @@ package com.packt.cardatabase.domain;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Car {
@@ -19,6 +22,10 @@ public class Car {
 	private String registerNumber;
 	private int year;
 	private int price;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "owner")
+	private Owner owner;
 	
 	public Car() {}
 
@@ -85,6 +92,14 @@ public class Car {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 
 	@Override

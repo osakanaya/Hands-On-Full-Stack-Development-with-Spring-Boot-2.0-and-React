@@ -1,11 +1,14 @@
 package com.packt.cardatabase.domain;
 
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Owner {
@@ -15,6 +18,9 @@ public class Owner {
 	private long ownerId;
 	private String firstName;
 	private String lastName;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	private List<Car> cars;
 	
 	public Owner() {}
 
@@ -45,6 +51,14 @@ public class Owner {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public List<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
 	}
 
 	@Override
