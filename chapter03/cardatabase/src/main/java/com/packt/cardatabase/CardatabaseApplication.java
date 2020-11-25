@@ -29,13 +29,33 @@ public class CardatabaseApplication {
 		return args -> {
 			Owner owner1 = new Owner("John", "Johnson");
 			Owner owner2 = new Owner("Mary", "Robinson");
+
+//			ownerRepository.save(owner1);
+//			ownerRepository.save(owner2);
 			
+//			carRepository.save(new Car("Ford", "Mustang", "Red", "ADF-1121", 2017, 59000, owner1));
+//			carRepository.save(new Car("Nissan", "Leaf", "White", "SSJ-3002", 2014, 29000, owner2));
+//			carRepository.save(new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018, 39000, owner2));
+
+			Car car1 = new Car("Ford", "Mustang", "Red", "ADF-1121", 2017, 59000);
+			Car car2 = new Car("Nissan", "Leaf", "White", "SSJ-3002", 2014, 29000);
+			Car car3 = new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018, 39000);
+
+			owner1.getCars().add(car1);
+			car1.getOwners().add(owner1);
+
+			owner2.getCars().add(car2);
+			car2.getOwners().add(owner2);
+			owner2.getCars().add(car3);
+			car3.getOwners().add(owner2);
+			
+			carRepository.save(car1);
+			carRepository.save(car2);
+			carRepository.save(car3);
+
 			ownerRepository.save(owner1);
 			ownerRepository.save(owner2);
-			
-			carRepository.save(new Car("Ford", "Mustang", "Red", "ADF-1121", 2017, 59000, owner1));
-			carRepository.save(new Car("Nissan", "Leaf", "White", "SSJ-3002", 2014, 29000, owner2));
-			carRepository.save(new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018, 39000, owner2));
+
 		};
 	}
 

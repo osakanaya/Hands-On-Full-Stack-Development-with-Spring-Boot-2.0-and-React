@@ -1,6 +1,8 @@
 package com.packt.cardatabase.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,11 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Car {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -22,21 +25,34 @@ public class Car {
 	private String registerNumber;
 	private int year;
 	private int price;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "owner")
-	private Owner owner;
-	
-	public Car() {}
 
-	public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner) {
+	@ManyToMany(mappedBy = "cars")
+	private Set<Owner> owners = new HashSet<Owner>();
+
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "owner")
+//	private Owner owner;
+
+	public Car() {
+	}
+
+//	public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner) {
+//		this.brand = brand;
+//		this.model = model;
+//		this.color = color;
+//		this.registerNumber = registerNumber;
+//		this.year = year;
+//		this.price = price;
+//		this.owner = owner;
+//	}
+
+	public Car(String brand, String model, String color, String registerNumber, int year, int price) {
 		this.brand = brand;
 		this.model = model;
 		this.color = color;
 		this.registerNumber = registerNumber;
 		this.year = year;
 		this.price = price;
-		this.owner = owner;
 	}
 
 	public long getId() {
@@ -95,17 +111,25 @@ public class Car {
 		this.price = price;
 	}
 
-	public Owner getOwner() {
-		return owner;
+//	public Owner getOwner() {
+//		return owner;
+//	}
+//
+//	public void setOwner(Owner owner) {
+//		this.owner = owner;
+//	}
+	
+	public Set<Owner> getOwners() {
+		return owners;
 	}
 
-	public void setOwner(Owner owner) {
-		this.owner = owner;
+	public void setOwners(Set<Owner> owners) {
+		this.owners = owners;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(brand, color, id, model, price, registerNumber, year);
+		return Objects.hash(brand, color, id, model, owners, price, registerNumber, year);
 	}
 
 	@Override
@@ -118,13 +142,41 @@ public class Car {
 			return false;
 		Car other = (Car) obj;
 		return Objects.equals(brand, other.brand) && Objects.equals(color, other.color) && id == other.id
-				&& Objects.equals(model, other.model) && price == other.price
+				&& Objects.equals(model, other.model) && Objects.equals(owners, other.owners) && price == other.price
 				&& Objects.equals(registerNumber, other.registerNumber) && year == other.year;
 	}
 
 	@Override
 	public String toString() {
 		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", color=" + color + ", registerNumber="
-				+ registerNumber + ", year=" + year + ", price=" + price + "]";
+				+ registerNumber + ", year=" + year + ", price=" + price + ", owners=" + owners + "]";
 	}
+	
+
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(brand, color, id, model, price, registerNumber, year);
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Car other = (Car) obj;
+//		return Objects.equals(brand, other.brand) && Objects.equals(color, other.color) && id == other.id
+//				&& Objects.equals(model, other.model) && price == other.price
+//				&& Objects.equals(registerNumber, other.registerNumber) && year == other.year;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", color=" + color + ", registerNumber="
+//				+ registerNumber + ", year=" + year + ", price=" + price + "]";
+//	}
+	
+	
 }
