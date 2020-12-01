@@ -33,8 +33,20 @@ function App() {
     {
       Header: "Owner",
       accessor: "owner.login"
+    },
+    {
+      id: "button",
+      sortable: false,
+      filterable: false,
+      width: 100,
+      accessor: "full_name",
+      Cell: ({ value }) => (<button onClick={ () => { btnClick(value) } }>Press me</button>)
     }
   ];
+
+  const btnClick= (value) => {
+    alert(value);
+  };
 
   return (
     <div className="App">
