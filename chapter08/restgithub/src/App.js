@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import './App.css';
+import ReactTable from "react-table-6";
+import 'react-table-6/react-table.css';
 
 function App() {
   const [data, setData] = useState([]);
@@ -19,22 +21,27 @@ function App() {
     setKeyword(e.target.value);
   }
 
-  const tableRows = data.map((item, index) => 
-    <tr key={index}>
-      <td>{ item.full_name }</td>
-      <td><a href={ item.html_url }>{ item.html_url }</a></td>
-    </tr>
-  );
+  const columns = [
+    {
+      Header: "Name",
+      accessor: "full_name"
+    },
+    {
+      Header: "URL",
+      accessor: "html_url"
+    },
+    {
+      Header: "Owner",
+      accessor: "owner.login"
+    }
+  ];
 
   return (
     <div className="App">
       <input type="text" onChange={ handleChange } />
       <button onClick={ fetchData } value={ keyword }>Fetch</button>
-      <table>
-        <tbody>
-          { tableRows }
-        </tbody>
-      </table>
+
+      <ReactTable data={ data } columns={ columns } />
     </div>
   );
 }
