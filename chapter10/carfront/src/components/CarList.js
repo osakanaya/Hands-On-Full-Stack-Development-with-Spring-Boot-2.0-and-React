@@ -53,7 +53,8 @@ class CarList extends Component {
     }
 
     onDelClick = (link) => {
-        fetch(link, { method: "DELETE"})
+        if (window.confirm("Are you sure to delete?")) {
+            fetch(link, { method: "DELETE"})
             .then(res => {
                 toast.success("Car deleted", {
                     position: toast.POSITION.BOTTOM_LEFT
@@ -66,6 +67,7 @@ class CarList extends Component {
                 });
                 console.error(err);
             });
+        }
     }
 
     fetchCars = () => {
