@@ -30,6 +30,14 @@ class CarList extends Component {
             {
                 Header: "Price",
                 accessor: "price"
+            },
+            {
+                id: "delbutton",
+                sortable: false,
+                filterable: false,
+                width: 100,
+                accessor: "_links.self.href",
+                Cell: ({ value }) => (<button onClick={ () => { this.onDelClick(value) } }>Delete</button>)
             }
         ];
 
@@ -40,7 +48,13 @@ class CarList extends Component {
         );
     }
 
-    componentDidMount() {
+    onDelClick = (link) => {
+        fetch(link, { method: "DELETE"})
+            .then(res => this.fetchCars())
+            .catch(err => console.error(err));
+    }
+
+    fetchCars = () => {
         fetch(SERVER_URL + "api/cars")
             .then((response) => response.json())
             .then((responseData) => {
@@ -49,6 +63,10 @@ class CarList extends Component {
                 });
             })
             .catch(err => console.error(err));
+    }
+
+    componentDidMount() {
+        this.fetchCars();
     }
 }
 
