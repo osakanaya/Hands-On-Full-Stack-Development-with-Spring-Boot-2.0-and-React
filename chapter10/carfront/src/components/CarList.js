@@ -5,6 +5,9 @@ import { SERVER_URL } from "../constants";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 class CarList extends Component {
     constructor(props) {
         super(props);
@@ -44,14 +47,25 @@ class CarList extends Component {
         return (
             <div className="App">
                 <ReactTable data={ this.state.cars } columns={ columns } filterable={ true } />
+                <ToastContainer autoClose={ 1500 } />
             </div>
         );
     }
 
     onDelClick = (link) => {
         fetch(link, { method: "DELETE"})
-            .then(res => this.fetchCars())
-            .catch(err => console.error(err));
+            .then(res => {
+                toast.success("Car deleted", {
+                    position: toast.POSITION.BOTTOM_LEFT
+                });
+                this.fetchCars();
+            })
+            .catch(err => {
+                toast.success("Car deleted", {
+                    position: toast.POSITION.BOTTOM_LEFT
+                });
+                console.error(err);
+            });
     }
 
     fetchCars = () => {
