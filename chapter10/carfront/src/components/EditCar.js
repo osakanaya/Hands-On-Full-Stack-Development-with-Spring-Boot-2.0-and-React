@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-//import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const AddCar = (props) => {
+const EditCar = (props) => {
     const [open, setOpen] = useState(false);
     const [car, setCar] = useState({
         barnd: '',
@@ -17,6 +16,14 @@ const AddCar = (props) => {
     });
 
     const handleClickOpen = () => {
+        setCar({
+            brand: props.car.brand,
+            model: props.car.model,
+            color: props.car.color,
+            year: props.car.year,
+            fuel: props.car.fuel,
+            price: props.car.price
+        });
         setOpen(true);
     };
 
@@ -32,15 +39,15 @@ const AddCar = (props) => {
     };
 
     const handleSave = () => {
-        props.addCar(car);
+        props.updateCar(car, props.link);
         handleClose();
-    }
+    };
 
     return (
         <div>
-            <button style={ { margin: 10 } } onClick={ handleClickOpen }>New Car</button>
+            <button style={ { margin: 10 } } onClick={ handleClickOpen }>Edit</button>
             <Dialog open={ open } onClose={ handleClose }>
-                <DialogTitle>New Car</DialogTitle>
+                <DialogTitle>Edit Car</DialogTitle>
                 <DialogContent>
                     <input type="text" placeholder="Brand" name="brand" value={ car.brand } onChange={ handleChange } /><br/>
                     <input type="text" placeholder="Model" name="model" value={ car.model } onChange={ handleChange } /><br/>
@@ -57,4 +64,4 @@ const AddCar = (props) => {
     );
 };
 
-export default AddCar;
+export default EditCar;
