@@ -12,6 +12,8 @@ import AddCar from "./AddCar";
 
 import EditCar from "./EditCar";
 
+import { CSVLink } from "react-csv";
+
 class CarList extends Component {
     constructor(props) {
         super(props);
@@ -121,9 +123,17 @@ class CarList extends Component {
             }
         ];
 
+        const csvHeaders = [
+            { label: "Brand", key: "brand" },
+            { label: "Model", key: "model" },
+            { label: "Color", key: "color" },
+            { label: "Price", key: "price" }
+        ];
+
         return (
             <div className="App">
                 <AddCar addCar={ this.addCar } fetchCars={ this.fetchCars } />
+                <CSVLink data={ this.state.cars } separator=";" headers={ csvHeaders }>Export CSV</CSVLink>
                 <ReactTable data={ this.state.cars } columns={ columns } filterable={ true } />
                 <ToastContainer autoClose={ 1500 } />
             </div>
