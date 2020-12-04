@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { SERVER_URL } from "../constants";
 
 class CarList extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class CarList extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/api/cars")
+        fetch(SERVER_URL + "api/cars")
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
