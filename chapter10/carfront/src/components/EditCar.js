@@ -4,6 +4,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import Button from "@material-ui/core/Button";
+
 const EditCar = (props) => {
     const [open, setOpen] = useState(false);
     const [car, setCar] = useState({
@@ -45,7 +47,7 @@ const EditCar = (props) => {
 
     return (
         <div>
-            <button style={ { margin: 10 } } onClick={ handleClickOpen }>Edit</button>
+            <Button color="primary" size="small" onClick={ handleClickOpen }>Edit</Button>
             <Dialog open={ open } onClose={ handleClose }>
                 <DialogTitle>Edit Car</DialogTitle>
                 <DialogContent>
@@ -56,8 +58,8 @@ const EditCar = (props) => {
                     <input type="text" placeholder="Price" name="price" value={ car.price } onChange={ handleChange } />
                 </DialogContent>
                 <DialogActions>
-                    <button onClick={ handleClose }>Cancel</button>
-                    <button onClick={ handleSave }>Save</button>
+                    <Button color="secondary" onClick={ handleClose }>Cancel</Button>
+                    <Button color="primary" onClick={ handleSave }>Save</Button>
                 </DialogActions>
             </Dialog>
         </div>
