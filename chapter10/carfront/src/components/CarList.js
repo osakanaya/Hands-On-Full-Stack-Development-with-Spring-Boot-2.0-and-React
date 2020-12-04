@@ -8,6 +8,7 @@ import AddCar from "./AddCar";
 import EditCar from "./EditCar";
 import { CSVLink } from "react-csv";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 class CarList extends Component {
     constructor(props) {
@@ -114,7 +115,7 @@ class CarList extends Component {
                 filterable: false,
                 width: 100,
                 accessor: "_links.self.href",
-                Cell: ({ value }) => (<button onClick={ () => { this.onDelClick(value) } }>Delete</button>)
+                Cell: ({ value }) => (<Button size="small" color="secondary" onClick={ () => { this.onDelClick(value) } }>Delete</Button>)
             }
         ];
 
