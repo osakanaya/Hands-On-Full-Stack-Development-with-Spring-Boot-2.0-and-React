@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-
 import { SERVER_URL } from "../constants";
-
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import AddCar from "./AddCar";
-
 import EditCar from "./EditCar";
-
 import { CSVLink } from "react-csv";
+import Grid from "@material-ui/core/Grid";
 
 class CarList extends Component {
     constructor(props) {
@@ -132,8 +127,14 @@ class CarList extends Component {
 
         return (
             <div className="App">
-                <AddCar addCar={ this.addCar } fetchCars={ this.fetchCars } />
-                <CSVLink data={ this.state.cars } separator=";" headers={ csvHeaders }>Export CSV</CSVLink>
+                <Grid container>
+                    <Grid item>
+                        <AddCar addCar={ this.addCar } fetchCars={ this.fetchCars } />
+                    </Grid>
+                    <Grid item style={ { padding: 15 } }>
+                        <CSVLink data={ this.state.cars } separator=";" headers={ csvHeaders }>Export CSV</CSVLink>
+                    </Grid>
+                </Grid>
                 <ReactTable data={ this.state.cars } columns={ columns } filterable={ true } />
                 <ToastContainer autoClose={ 1500 } />
             </div>
