@@ -3,6 +3,8 @@ import { SERVER_URL } from "../constants";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CarList from "./CarList";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const [user, setUser] = useState({
@@ -28,13 +30,22 @@ const Login = () => {
             if (jwtToken !== null) {
                 sessionStorage.setItem("jwt", jwtToken);
                 setAuth(true);
+            } else {
+                toast.warn("Check your username and password", {
+                    position: toast.POSITION.BOTTOM_LEFT
+                });
             }
         })
         .catch(err => console.error(err));
     };
 
+    const logout = () => {
+        sessionStorage.removeItem("jwt");
+        setAuth(false);
+    }
+
     if (isAuthenticated === true) {
-        return (<CarList />);
+        return (<CarList logout={ logout } />);
     } else {
         return (
             <div>
@@ -43,6 +54,7 @@ const Login = () => {
                 <Button variant="outlined" color="primary" onClick={ login }>
                     Login
                 </Button>
+                <ToastContainer autoClose={ 1500 } />
             </div>
         );
     }

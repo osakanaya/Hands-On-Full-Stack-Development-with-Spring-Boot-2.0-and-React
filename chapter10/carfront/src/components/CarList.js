@@ -154,6 +154,9 @@ class CarList extends Component {
                     <Grid item style={ { padding: 15 } }>
                         <CSVLink data={ this.state.cars } separator=";" headers={ csvHeaders }>Export CSV</CSVLink>
                     </Grid>
+                    <Grid item style={ { padding: 15 } }>
+                        <Button variant="outlined" color="primary" onClick={ this.props.logout }>Lougout</Button>
+                    </Grid>
                 </Grid>
                 <ReactTable data={ this.state.cars } columns={ columns } filterable={ true } />
                 <ToastContainer autoClose={ 1500 } />
