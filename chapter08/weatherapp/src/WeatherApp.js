@@ -29,7 +29,7 @@ class WeatherApp extends Component {
     }
 
     componentDidMount() {
-        fetch('http://api.openweathermap.org/data/2.5/weather?q=London&units=Metric&appid=6f3e935c7e409bc576abeb9dc35ae3d0')
+        fetch('http://api.openweathermap.org/data/2.5/weather?q=London&units=Metric&appid=xxxxxx')
         .then(response => response.json())
         .then(responseData => {
             this.setState({
